@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.snapp_smartnutritionapp.databinding.ActivityMainBinding
 import com.dicoding.snapp_smartnutritionapp.ui.Login.Loginactivity
+import com.dicoding.snapp_smartnutritionapp.ui.Navigation.ui.Scan.ScanFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,10 +17,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        val tvStarted = findViewById<TextView>(R.id.Started)
+        val tvStarted = findViewById<TextView>(R.id.started)
         tvStarted.setOnClickListener {
-            val intent = Intent(this, Loginactivity::class.java)
-            startActivity(intent)
+            // Comment sementara untuk cobain fitur camera
+//            val intent = Intent(this, Loginactivity::class.java)
+//            startActivity(intent)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.camera_fragment_container, ScanFragment()).addToBackStack(null).commit()
         }
     }
 }

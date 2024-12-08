@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -10,43 +10,57 @@
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/nutriscan_img"
         android:layout_width="match_parent"
-        android:layout_height="439dp"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/icon_food"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="430dp"
+        android:src="@drawable/icon_food"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
         android:background="@drawable/rounded_corners"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="34dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
         <TextView
-            android:layout_marginStart="37dp"
-            android:layout_marginTop="34dp"
-            android:layout_width="match_parent"
+            android:id="@+id/feature_title"
+            style="@style/heading"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            style="@style/heading"
-            android:text="@string/Judul"/>
+            android:text="@string/Judul"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            android:layout_marginStart="37dp"
-            android:layout_marginTop="22dp"
-            android:layout_marginEnd="34dp"
+            android:id="@+id/feature_description"
+            style="@style/heading_4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins_medium"
-            style="@style/heading_4"
-            android:text="@string/Subjudul"/>
+            android:justificationMode="inter_word"
+            android:text="@string/Subjudul"
+            app:layout_constraintTop_toBottomOf="@id/feature_title" />
+
         <Button
-            android:id="@+id/Started"
-            android:layout_marginStart="34dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginEnd="34dp"
+            android:id="@+id/started"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Lest’s Started"/>
-    </LinearLayout>
-</LinearLayout>
+            android:layout_marginTop="16dp"
+            android:background="@drawable/round_button"
+            android:text="Get Started"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/feature_description" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/camera_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
