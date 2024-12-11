@@ -10,24 +10,21 @@
 
     <ImageView
         android:id="@+id/mainImage"
-        android:layout_width="398dp"
-        android:layout_height="385dp"
-        android:background="@drawable/icon_food"
-        app:layout_constraintBottom_toTopOf="@id/bottomLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.459" />
-
+        android:layout_width="match_parent"
+        android:layout_height="430dp"
+        android:src="@drawable/icon_food"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
         android:background="@drawable/rounded_corners"
         android:orientation="vertical"
         android:padding="34dp"
         app:layout_constraintBottom_toBottomOf="parent">
+
         <TextView
             android:id="@+id/feature_title"
             style="@style/heading"
@@ -50,11 +47,11 @@
             app:layout_constraintTop_toBottomOf="@id/feature_title" />
 
         <Button
-            android:id="@+id/Started"
+            android:id="@+id/started"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/rounded_primary"
+            android:background="@drawable/round_button"
             android:text="Get Started"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/feature_description" />

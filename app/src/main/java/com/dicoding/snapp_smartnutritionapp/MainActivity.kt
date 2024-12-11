@@ -6,6 +6,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.snapp_smartnutritionapp.databinding.ActivityMainBinding
 import com.dicoding.snapp_smartnutritionapp.ui.Login.LoginActivity
+import com.dicoding.snapp_smartnutritionapp.ui.Navigation.ui.Scan.ScanFragment
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,10 +18,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        val tvStarted = findViewById<TextView>(R.id.Started)
+        val tvStarted = findViewById<TextView>(R.id.started)
         tvStarted.setOnClickListener {
+
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+
         }
     }
 }
