@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:orientation="vertical"
+    android:padding="37dp"
+    android:gravity="center_vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.Login.Loginactivity">
@@ -13,8 +15,6 @@
         style="@style/heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="133dp"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/login"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,6 @@
         style="@style/heading_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="39dp"
         android:fontFamily="@font/poppins"
         android:text="@string/sign_in_to_countinue"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,31 +35,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_medium"
-        android:layout_marginStart="39dp"
+
         android:layout_marginTop="98dp"
         android:text="Login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login" />
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="39dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/searchbg"
+        android:padding="2dp"
         app:startIconDrawable="@drawable/baseline_email_24"
-        app:startIconTint="@color/Primary">
+        app:startIconTint="@color/Primary"
+        app:boxBackgroundMode="none"
+        app:hintEnabled="false"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
+            android:background="@drawable/roundedprimarycontainer"
             android:hint="Email"
             android:fontFamily="@font/poppins"
             android:inputType="textEmailAddress"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:textSize="16sp"/>
     </com.google.android.material.textfield.TextInputLayout>
     <!--    Password-->
@@ -70,7 +73,6 @@
         android:fontFamily="@font/poppins_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="39dp"
         android:layout_marginTop="19dp"
         android:text="@string/password"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,34 +81,35 @@
         android:id="@+id/password_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="39dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/searchbg"
+        android:padding="2dp"
         app:startIconDrawable="@drawable/baseline_lock_24"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleDrawable="@drawable/baseline_visibility_24"
-        app:passwordToggleTint="@color/Primary"
         app:startIconTint="@color/Primary"
-        app:passwordToggleContentDescription="show pasword">
+        app:boxBackgroundMode="none"
+        app:hintEnabled="false"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/Primary"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
+            android:layout_height="70dp"
+            android:background="@drawable/roundedprimarycontainer"
+            android:hint="Password"
             android:fontFamily="@font/poppins"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:textSize="16sp"/>
     </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/tvLogin"
-        android:layout_width="315dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginTop="39dp"
+        android:background="@drawable/rounded_primary"
         android:text="@string/login"
         app:layout_constraintTop_toBottomOf="@+id/password_layout"/>
     <TextView
@@ -121,10 +124,11 @@
         app:layout_constraintTop_toBottomOf="@+id/button" />
     <Button
         android:id="@+id/SignInWithGoogle"
-        android:layout_width="315dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginTop="13dp"
+        android:background="@drawable/rounded_primary"
         android:layout_marginBottom="85dp"
         android:text="@string/sign_in_with_google"
         android:drawablePadding="8dp" />

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:padding="39dp"
+    android:gravity="center_vertical"
+    android:layout_height="match_parent"
+    tools:context=".ui.editProfile.EditProfileActivity">
+
+    <!--    Username-->
+    <TextView
+        android:id="@+id/tv_editusername"
+        style="@style/heading_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Username"
+        app:layout_constraintStart_toStartOf="@id/editUsername_layout"
+        app:layout_constraintBottom_toTopOf="@id/editUsername_layout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+    
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editUsername_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/searchbg"
+        android:padding="2dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:boxStrokeColor="@color/Primary"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_editusername"
+        app:layout_constraintBottom_toTopOf="@id/tv_editpassword"
+        app:startIconDrawable="@drawable/baseline_email_24"
+        app:startIconTint="@color/Primary"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_email"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/roundedprimarycontainer"
+            android:hint="Masukkan username"
+            android:fontFamily="@font/poppins"
+            android:inputType="textEmailAddress"
+            android:textSize="16sp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--    Edit Password-->
+    <TextView
+        android:id="@+id/tv_editpassword"
+        style="@style/heading_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/password"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/editpassword_layout"
+        app:layout_constraintTop_toBottomOf="@+id/editUsername_layout"
+        app:layout_constraintBottom_toTopOf="@id/editpassword_layout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editpassword_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/searchbg"
+        android:padding="2dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:boxStrokeColor="@color/Primary"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_editpassword"
+        app:layout_constraintBottom_toTopOf="@id/btn_save"
+        app:startIconDrawable="@drawable/baseline_lock_24"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleDrawable="@drawable/baseline_visibility_24"
+        app:passwordToggleTint="@color/Primary"
+        app:startIconTint="@color/Primary"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_password"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/roundedprimarycontainer"
+            android:hint="Masukkan password"
+            android:fontFamily="@font/poppins"
+            android:inputType="textPassword"
+            android:textSize="16sp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:text="Simpan"
+        android:background="@drawable/rounded_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editpassword_layout"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,5 +15,6 @@
     <string name="sign_up">Sign up</string>
     <string name="scan">Scan</string>
     <string name="bookmark">bookmark</string>
+    <string name="edit_profile_button">Tombol Edit Profil</string>
     <string name="image_classifier_failed">Gagal</string>
 </resources>

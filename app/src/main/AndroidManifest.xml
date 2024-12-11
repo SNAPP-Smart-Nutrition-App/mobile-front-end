@@ -22,11 +22,23 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.DetailData.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Navigation.ui.search.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.editProfile.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.Navigation.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home" />
         <activity
-            android:name=".ui.Login.Loginactivity"
+            android:name=".ui.Login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".ui.Register.RegisterViewActivity"

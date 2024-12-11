@@ -16,6 +16,7 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.google.android.material.snackbar.Snackbar
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -45,6 +46,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+
     fun registerUser(username: String, email: String, password: String) {
         showLoading(true)
         val request = RegisterRequest(username, email, password)
@@ -53,21 +55,30 @@ class RegisterActivity : AppCompatActivity() {
             override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                 showLoading(false)
                 if (response.isSuccessful) {
-                    // Logika jika berhasil
                     response.body()?.let {
                         Log.d(TAG, "Registration Success: ${it.message}")
-                        
+                        Snackbar.make(binding.root, "Registrasi berhasil!", Snackbar.LENGTH_LONG)
+                            .setBackgroundTint(Color.GREEN)
+                            .setTextColor(Color.WHITE)
+                            .show()
                     }
                 } else {
-                    // Tangani jika ada error dari server
                     val errorBody = Gson().fromJson(response.errorBody()?.string(), RegisterResponse::class.java)
                     Log.e(TAG, "Registration Failed: ${errorBody.message}")
+                    Snackbar.make(binding.root, "Registrasi gagal: ${errorBody.message}", Snackbar.LENGTH_LONG)
+                        .setBackgroundTint(Color.RED)
+                        .setTextColor(Color.WHITE)
+                        .show()
                 }
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                 showLoading(false)
                 Log.e(TAG, "onFailure: ${t.message}")
+                Snackbar.make(binding.root, "Terjadi kesalahan: ${t.message}", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(Color.parseColor("#F44336"))
+                    .setTextColor(Color.WHITE)
+                    .show()
             }
         })
     }
@@ -87,15 +98,8 @@ class RegisterActivity : AppCompatActivity() {
         }
         return true
     }
-
     // Fungsi untuk menampilkan atau menyembunyikan dialog loading
     private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
-
-    // Fungsi untuk menampilkan toast
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
 }

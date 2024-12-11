@@ -6,18 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Primary"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/nutriscan_img"
+        android:id="@+id/mainImage"
         android:layout_width="match_parent"
         android:layout_height="430dp"
         android:src="@drawable/icon_food"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,9 +56,4 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/feature_description" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <FrameLayout
-        android:id="@+id/camera_fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
 </androidx.constraintlayout.widget.ConstraintLayout>

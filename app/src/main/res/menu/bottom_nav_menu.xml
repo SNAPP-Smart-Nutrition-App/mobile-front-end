@@ -10,10 +10,4 @@
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/baseline_center_focus_weak_24"
         android:title="@string/scan" />
-
-    <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/baseline_bookmark_24"
-        android:title="@string/bookmark" />
-
 </menu>

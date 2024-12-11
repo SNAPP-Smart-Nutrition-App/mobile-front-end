@@ -9,6 +9,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.dicoding.snapp_smartnutritionapp.R
 import com.dicoding.snapp_smartnutritionapp.databinding.ActivityHomeBinding
+import com.dicoding.snapp_smartnutritionapp.ui.Navigation.ui.home.HomeFragment
 
 class HomeActivity : AppCompatActivity() {
 
