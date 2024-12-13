@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.Navigation.HomeActivity"
+    >
 
     <androidx.camera.view.PreviewView
         android:id="@+id/viewfinder"
@@ -22,15 +24,12 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
-    android:layout_marginBottom="200dp"
-    >
-
+    android:layout_marginBottom="200dp">
     <TextView
         android:id="@+id/less_detail_result"
         android:layout_width="300dp"
         android:layout_height="90dp"
         android:layout_centerInParent="true"
-
         android:background="@drawable/round_corner_xl"
         android:gravity="center"
         android:padding="20dp"
@@ -40,31 +39,27 @@
         app:layout_constraintRight_toRightOf="parent"
         android:elevation="10dp"/>
 </FrameLayout>
-
-
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/text_dashboard"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="8dp"-->
-    <!--        android:layout_marginTop="8dp"-->
-    <!--        android:layout_marginEnd="8dp"-->
-    <!--        android:textAlignment="center"-->
-    <!--        android:textSize="20sp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-    <Button
+    <ImageButton
         android:id="@+id/capture_button"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/round_button"
-        android:text="Search"
+        android:backgroundTint="@color/White"
+        android:src="@drawable/capture_48px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
+<ImageButton
+    android:id="@+id/open_gallery"
+    android:layout_width="70dp"
+    android:layout_height="70dp"
+    android:src="@drawable/gallery_48px"
+    android:backgroundTint="@color/White"
+    android:background="@drawable/round_button"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toLeftOf="@id/capture_button"
+    android:layout_marginBottom="50dp"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>
