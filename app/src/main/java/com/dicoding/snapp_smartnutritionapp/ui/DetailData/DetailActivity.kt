@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import androidx.core.content.ContextCompat
 import android.animation.ObjectAnimator
+import android.net.Uri
 import android.view.animation.DecelerateInterpolator
 import android.widget.ProgressBar
 import android.view.View
@@ -32,9 +33,11 @@ class DetailActivity : AppCompatActivity() {
 
     private val _eventDetail = MutableLiveData<ListEventsItem>()
     val eventDetail: LiveData<ListEventsItem> = _eventDetail
+
     companion object {
         const val EVENT_ID = "233123123"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -46,23 +49,30 @@ class DetailActivity : AppCompatActivity() {
             title = "Detail"
         }
 
-        val eventId = intent.getIntExtra(EVENT_ID,0)
-        
-        println("EventID: $eventId")
-        
-        detailEventViewModel.getEvents(eventId)
-        
-        detailEventViewModel.eventList.observe(this) { eventList ->
-            eventList?.firstOrNull()?.let { event ->
-                with(binding) {
-                    TitleViewDetailData.text = event.name
-                    Glide.with(imageView.context)
-                        .load(event.imageLogo)
-                        .into(imageView)
+        val eventId = intent.getIntExtra(EVENT_ID, 0)
+
+        val imageUri = intent.getStringExtra("imageUri")
+
+        if (imageUri != null) {
+
+            val uri = Uri.parse(imageUri)
+            binding.imageView.setImageURI(uri)
+
+        } else {
+            println("EventID: $eventId")
+
+            detailEventViewModel.getEvents(eventId)
+
+            detailEventViewModel.eventList.observe(this) { eventList ->
+                eventList?.firstOrNull()?.let { event ->
+                    with(binding) {
+                        TitleViewDetailData.text = event.name
+                        Glide.with(imageView.context).load(event.imageLogo).into(imageView)
+                    }
                 }
             }
-        }
 
+        }
         detailEventViewModel.isLoading.observe(this) {
             showLoading(it)
         }
@@ -78,8 +88,7 @@ class DetailActivity : AppCompatActivity() {
 
         // Fungsi untuk membuat animasi
         fun animateProgress(progressBar: ProgressBar, progress: Int) {
-            ObjectAnimator.ofInt(progressBar, "progress", 0, progress)
-                .apply {
+            ObjectAnimator.ofInt(progressBar, "progress", 0, progress).apply {
                     duration = 2000 // Durasi animasi dalam milidetik
                     interpolator = DecelerateInterpolator()
                     start()
@@ -93,6 +102,7 @@ class DetailActivity : AppCompatActivity() {
         animateProgress(progressBar4, 40)
         animateProgress(progressBarMain, 95)
     }
+
     private fun setupBarChart() {
         val barChart = findViewById<BarChart>(R.id.barChart)
 
@@ -120,7 +130,8 @@ class DetailActivity : AppCompatActivity() {
             xAxis.apply {
                 position = XAxis.XAxisPosition.BOTTOM
                 setDrawGridLines(false)
-                valueFormatter = IndexAxisValueFormatter(arrayOf("Calories", "Carbs", "Protein", "Fat"))
+                valueFormatter =
+                    IndexAxisValueFormatter(arrayOf("Calories", "Carbs", "Protein", "Fat"))
                 granularity = 1f
             }
 
@@ -136,6 +147,7 @@ class DetailActivity : AppCompatActivity() {
             animateY(2000)
         }
     }
+
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             LoadingDialog.show(this)

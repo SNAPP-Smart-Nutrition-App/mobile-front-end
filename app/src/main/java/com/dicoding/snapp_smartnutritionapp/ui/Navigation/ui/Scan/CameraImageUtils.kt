@@ -1,10 +1,11 @@
 package com.dicoding.snapp_smartnutritionapp.ui.Navigation.ui.Scan
 
-import android.content.ContentValues
+
 import android.content.Context
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
-import android.os.Build
-import android.provider.MediaStore
+import android.net.Uri
+import android.os.Environment
 import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
@@ -15,7 +16,8 @@ import androidx.camera.core.UseCase
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
-import okhttp3.MediaType
+import androidx.lifecycle.ViewModel
+import com.dicoding.snapp_smartnutritionapp.ui.DetailData.DetailActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -52,28 +54,24 @@ class CameraImageUtils(val context: Context) {
 
     fun capture() {
         val name = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(System.currentTimeMillis())
-        val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/SNAPP-Nutriscan")
-            }
+        val storageDir = File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "SNAPP-Nutriscan")
+        if (!storageDir.exists()) {
+            storageDir.mkdirs()
         }
-        val outputOptions = ImageCapture.OutputFileOptions.Builder(
-            context.contentResolver,
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            contentValues
-        ).build()
+
+        val photoFile = File(storageDir, "$name.jpg")
+
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
         imageCapture.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(context),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    val savedUri = outputFileResults.savedUri
-                    Toast.makeText(context, "Image Saved at $savedUri", Toast.LENGTH_SHORT)
-                        .show()
-
+                    val savedUri = Uri.fromFile(photoFile)
+                    val intent = Intent(context, DetailActivity::class.java)
+                    intent.putExtra("imageUri", savedUri.toString())
+                    context.startActivity(intent)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
