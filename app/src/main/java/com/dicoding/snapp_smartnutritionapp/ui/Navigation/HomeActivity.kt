@@ -1,5 +1,6 @@
 package com.dicoding.snapp_smartnutritionapp.ui.Navigation
 
+import android.graphics.Color
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.dicoding.snapp_smartnutritionapp.R
 import com.dicoding.snapp_smartnutritionapp.databinding.ActivityHomeBinding
 import com.dicoding.snapp_smartnutritionapp.ui.Navigation.ui.home.HomeFragment
+import com.google.android.material.snackbar.Snackbar
 
 class HomeActivity : AppCompatActivity() {
 
@@ -32,5 +34,21 @@ class HomeActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        if (intent.getBooleanExtra("openHomeFragment", false)) {
+            navController.navigate(R.id.navigation_home)
+            
+            // Tampilkan pesan sukses setelah masuk ke HomeFragment
+            if (intent.getBooleanExtra("showSuccessMessage", false)) {
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Login berhasil!",
+                    Snackbar.LENGTH_LONG
+                )
+                    .setBackgroundTint(Color.GREEN)
+                    .setTextColor(Color.WHITE)
+                    .show()
+            }
+        }
     }
 }

@@ -17,12 +17,26 @@ import com.dicoding.snapp_smartnutritionapp.ui.Register.RegisterActivity
 import com.google.android.material.snackbar.Snackbar
 import android.os.Handler
 import android.os.Looper
-import com.dicoding.snapp_smartnutritionapp.data.response.Cobacoba.DummmyData
-import com.dicoding.snapp_smartnutritionapp.data.response.Cobacoba.UserPreference
+import android.util.Log
+import com.dicoding.snapp_smartnutritionapp.data.response.LoginRequest
+import com.dicoding.snapp_smartnutritionapp.data.response.LoginResponse
+import com.dicoding.snapp_smartnutritionapp.data.response.RegisterResponse
+import com.dicoding.snapp_smartnutritionapp.data.retrofit.ApiConfig
 import com.dicoding.snapp_smartnutritionapp.ui.LoadingDialog
+import com.dicoding.snapp_smartnutritionapp.ui.Navigation.ui.home.HomeFragment
+import com.dicoding.snapp_smartnutritionapp.ui.Navigation.ui.home.HomeViewModel
+import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import com.dicoding.snapp_smartnutritionapp.data.local.UserPreference
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginactivityBinding
+    private lateinit var userPreference: UserPreference
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +44,37 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
+        userPreference = UserPreference(this)
+
         binding.tvLogin.setOnClickListener {
             val email = binding.editEmail.text.toString()
             val password = binding.editPassword.text.toString()
-            
-            performDummyLogin(email, password)
+            loginViewModel.loginUser(email, password)
         }
+
+        loginViewModel.loginResult.observe(this, Observer { result ->
+            showLoading(false)
+            result.onSuccess { loginResponse ->
+                // Sesuaikan dengan struktur LoginResponse dari API
+
+                // Log untuk debugging
+                // Langsung pindah ke HomeActivity
+                val intent = Intent(this@LoginActivity, HomeActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    // Kirim pesan sukses sebagai extra
+                    putExtra("showSuccessMessage", true)
+                    putExtra("openHomeFragment", true)
+                }
+                startActivity(intent)
+                finish()
+            }.onFailure { exception ->
+                Log.e(TAG, "Login Failed: ${exception.message}")
+                Snackbar.make(binding.root, "Login gagal: ${exception.message}", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(Color.RED)
+                    .setTextColor(Color.WHITE)
+                    .show()
+            }
+        })
 
         val tvSignUp = findViewById<TextView>(R.id.tvSignUp)
         tvSignUp.setOnClickListener {
@@ -43,52 +82,16 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
     private fun showLoading(isLoading: Boolean) {
-    if (isLoading) {
-        LoadingDialog.show(this)
-    } else {
-        LoadingDialog.hide()
+        if (isLoading) {
+            LoadingDialog.show(this)
+        } else {
+            LoadingDialog.hide()
         }
     }
 
-    private fun performDummyLogin(email: String, password: String) {
-        // Simulasi loading
-       showLoading(true)
-
-        // Simulasi delay network
-        Handler(Looper.getMainLooper()).postDelayed({
-           showLoading(false)
-            
-            // Cek kredensial dengan data dummy
-            val user = DummmyData.dummyUsers.find {
-                it.email == email && it.password == password 
-            }
-
-            if (user != null) {
-                // Simpan data user ke SharedPreferences
-                val userPref = UserPreference(this)
-                userPref.saveUser(
-                    username = user.username,
-                    email = user.email,
-                    token = "dummy-token-${user.username}"
-                )
-
-                // Tampilkan pesan sukses
-                Snackbar.make(binding.root, "Login berhasil!", Snackbar.LENGTH_SHORT)
-                    .setBackgroundTint(Color.GREEN)
-                    .setTextColor(Color.WHITE)
-                    .show()
-
-                // Pindah ke HomeActivity
-                startActivity(Intent(this, HomeActivity::class.java))
-            } else {
-                // Tampilkan pesan error
-                Snackbar.make(binding.root, "Email atau password salah!", Snackbar.LENGTH_SHORT)
-                    .setBackgroundTint(Color.RED)
-                    .setTextColor(Color.WHITE)
-                    .show()
-            }
-        }, 2000) // Delay 1 detik untuk simulasi network
+    companion object{
+        private const val TAG = "Login Activiry"
     }
-    
 }
