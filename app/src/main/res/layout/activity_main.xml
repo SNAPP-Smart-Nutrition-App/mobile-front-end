@@ -10,9 +10,12 @@
 
     <ImageView
         android:id="@+id/mainImage"
-        android:layout_width="match_parent"
+        android:layout_width="450dp"
         android:layout_height="430dp"
+        android:scaleType="centerInside"
         android:src="@drawable/icon_food"
+        android:layout_marginBottom="250dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +27,6 @@
         android:orientation="vertical"
         android:padding="34dp"
         app:layout_constraintBottom_toBottomOf="parent">
-
         <TextView
             android:id="@+id/feature_title"
             style="@style/heading"

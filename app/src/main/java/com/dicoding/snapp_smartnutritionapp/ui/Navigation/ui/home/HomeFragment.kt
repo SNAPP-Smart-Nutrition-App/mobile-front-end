@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.snapp_smartnutritionapp.databinding.FragmentHomeBinding
 import com.dicoding.snapp_smartnutritionapp.ui.Navigation.EventAdapter
 import com.dicoding.snapp_smartnutritionapp.ui.profile.ProfileActivity
+import android.graphics.Color
+import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment : Fragment() {
 
@@ -19,6 +21,10 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    companion object {
+        const val EXTRA_FROM_LOGIN = "extra_from_login"
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -26,6 +32,17 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activity?.intent?.getBooleanExtra(EXTRA_FROM_LOGIN, false)?.let { fromLogin ->
+            if (fromLogin) {
+                Snackbar.make(binding.root, "Selamat datang! Login berhasil", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(Color.GREEN)
+                    .setTextColor(Color.WHITE)
+                    .show()
+                activity?.intent?.removeExtra(EXTRA_FROM_LOGIN)
+            }
+        }
+
         binding.profileImage.setOnClickListener {
             val intent = Intent(activity, ProfileActivity::class.java)
             startActivity(intent)
