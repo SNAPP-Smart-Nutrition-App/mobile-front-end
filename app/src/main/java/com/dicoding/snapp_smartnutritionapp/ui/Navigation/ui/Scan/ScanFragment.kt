@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.snapp_smartnutritionapp.databinding.FragmentScanBinding
+import com.dicoding.snapp_smartnutritionapp.ui.DetailData.DetailActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -114,6 +115,20 @@ class ScanFragment : Fragment() {
         activityResultLauncher.launch(REQUIRED_PERMISSIONS)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1) {
+            data?.data?.let { uri ->
+                val intent = Intent(requireContext(), DetailActivity::class.java)
+                intent.putExtra("imageUri", uri.toString())
+
+//                viewModel.uploadImage(requireContext(), uri)
+                startActivity(intent)
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -131,7 +146,7 @@ class ScanFragment : Fragment() {
         }
         binding.openGallery.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, 100)
+            startActivityForResult(intent, 1)
         }
         val root: View = binding.root
         return root
